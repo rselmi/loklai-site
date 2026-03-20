@@ -3,52 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loklai | Inteligência Artificial 100% Local</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Lokl AI | Soberania Digital Local</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <div class="logo">LOKL<span>AI</span></div>
-            <div class="tagline">Soberania Digital</div>
-        </div>
-    </nav>
 
-    <header class="hero">
-        <div class="container">
-            <h1>Sua Inteligência Estratégica. <br><span class="highlight">Zero Risco de Nuvem.</span></h1>
-            <p>O assistente de IA que processa dados sensíveis 100% offline no seu hardware. Proteção total contra vazamentos no ChatGPT.</p>
-            <div class="cta-group">
-                <a href="#" class="btn-primary">Baixar Versão Enterprise</a>
-                <a href="#" class="btn-secondary">Whitepaper de Segurança</a>
-            </div>
-        </div>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">LOKL<span>AI</span></div>
     </header>
 
-    <section class="features">
-        <div class="container">
-            <div class="card">
+    <main>
+        <section class="hero reveal">
+            <h1>Soberania Digital <span>Local & Privada.</span></h1>
+            <p>Implementamos o poder dos grandes modelos de linguagem dentro do seu firewall. Sem nuvem, sem assinaturas, sem riscos.</p>
+            <a href="mailto:rafael@seuemail.com" class="cta-button">Solicitar Diagnóstico</a>
+        </section>
+
+        <section class="features">
+            <div class="feature-card reveal">
                 <h3>Privacidade Absoluta</h3>
-                <p>Nenhum dado sai da sua máquina. Ideal para setores Jurídico, Financeiro e RH.</p>
+                <p>Seus dados corporativos permanecem em sua infraestrutura física. Proteção contra vazamentos e conformidade nativa com LGPD.</p>
             </div>
-            <div class="card">
-                <h3>Eficiência Sustentável</h3>
-                <p>Reduza a pegada de carbono eliminando a dependência de grandes data centers.</p>
+            <div class="feature-card reveal">
+                <h3>Custo Token-Zero</h3>
+                <p>A inteligência artificial como um ativo fixo. Pague pela implementação e hardware, nunca mais por cada palavra gerada.</p>
             </div>
-            <div class="card">
-                <h3>Performance Nativa</h3>
-                <p>Aproveite o poder total da sua NPU/GPU local para respostas instantâneas.</p>
+            <div class="feature-card reveal">
+                <h3>Agentes Autônomos</h3>
+                <p>Integramos LLMs com seus bancos de dados e sistemas locais via Docker e n8n, automatizando processos sem expor sua estratégia.</p>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Loklai por Rafael Selmi. Desenvolvido para máxima privacidade.</p>
-        </div>
+        <p>&copy; 2026 Lokl AI • Campinas, Brasil</p>
     </footer>
+
+    <script>
+        // Configuração das transições JS
+        ScrollReveal().reveal('.reveal', {
+            delay: 200,
+            distance: '50px',
+            duration: 1000,
+            easing: 'cubic-bezier(0.5, 0, 0, 1)',
+            interval: 100,
+            origin: 'bottom'
+        });
+    </script>
 </body>
 </html>
