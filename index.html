@@ -7,53 +7,120 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/scrollreveal"></script>
 </head>
 <body>
 
     <div class="bg-glow"></div>
 
     <header>
-        <div class="logo">LOKL<span>AI</span></div>
+        <div class="logo">Lokl <span>AI</span></div>
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero reveal">
-            <h1>Soberania Digital <span>Local & Privada.</span></h1>
+            <h1>Sua Inteligência Artificial <span>Local & Privada.</span></h1>
             <p>Implementamos o poder dos grandes modelos de linguagem dentro do seu firewall. Sem nuvem, sem assinaturas, sem riscos.</p>
-            <a href="mailto:rafael@seuemail.com" class="cta-button">Solicitar Diagnóstico</a>
+            <div class="cta-container">
+                <a href="#contato" class="cta-button">Instale agora!</a>
+            </div>
         </section>
 
+        <!-- Seção de Impacto: A Crise da Infraestrutura -->
+        <section class="infra-crisis reveal">
+            <div class="crisis-content">
+                <span class="badge">O Lado Oculto da Nuvem</span>
+                <h2>Data Centers no limite. <span>Sua empresa não pode esperar.</span></h2>
+                <p>A explosão da IA gerou um gargalo global. Data centers centrais sofrem com escassez de energia e custos imprevisíveis. Depender da nuvem hoje é aceitar que a sua operação está à mercê de terceiros.</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <strong>+300%</strong>
+                        <span>Demanda de Energia Global</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>85%</strong>
+                        <span>Modelos Expostos a Vazamentos</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>Latência</strong>
+                        <span>Inconsistência em Horários de Pico</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>Custos</strong>
+                        <span>Altas Imprevisíveis por Processamento</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
         <section class="features">
             <div class="feature-card reveal">
+                <div class="icon">🛡️</div>
                 <h3>Privacidade Absoluta</h3>
-                <p>Seus dados corporativos permanecem em sua infraestrutura física. Proteção contra vazamentos e conformidade nativa com LGPD.</p>
+                <p>Seus dados e os de seus clientes nunca saem do seu computador. Processamento 100% offline, garantindo sigilo total e conformidade com a LGPD.</p>
             </div>
             <div class="feature-card reveal">
-                <h3>Custo Token-Zero</h3>
-                <p>A inteligência artificial como um ativo fixo. Pague pela implementação e hardware, nunca mais por cada palavra gerada.</p>
+                <div class="icon">🚀</div>
+                <h3>Instalação Inteligente</h3>
+                <p>Esqueça configurações complexas. Nosso instalador único configura todo o ambiente de IA para você em segundos. É só instalar e começar a usar.</p>
             </div>
             <div class="feature-card reveal">
-                <h3>Agentes Autônomos</h3>
-                <p>Integramos LLMs com seus bancos de dados e sistemas locais via Docker e n8n, automatizando processos sem expor sua estratégia.</p>
+                <div class="icon">💻</div>
+                <h3>Performance Otimizada</h3>
+                <p>Desenvolvido especificamente para Windows. O Lokl AI utiliza o máximo do seu hardware atual para entregar respostas rápidas sem depender de internet.</p>
+            </div>
+        </section>
+
+        <!-- Seção de Contato -->
+        <section id="contato" class="contact-section reveal">
+            <div class="contact-container">
+                <h2>Inicie sua Jornada Local</h2>
+                <p>Consultoria técnica especializada para a sua infraestrutura.</p>
+                
+                <form class="contact-form" action="https://formspree.io/f/mqkppvwr" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="text" name="firstName" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Sobrenome</label>
+                            <input type="text" name="lastName" placeholder="Seu sobrenome" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Área de Atuação / Empresa</label>
+                        <input type="text" name="businessArea" placeholder="Ex: Advocacia, Consultoria, Nome da Empresa" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>WhatsApp / Celular</label>
+                            <input type="tel" name="whatsapp" placeholder="(19) 99999-9999" required>
+                        </div>
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input type="email" name="email" placeholder="seu@email.com" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="cta-button-form">Enviar Solicitação</button>
+                    <p class="subtitle" style="font-size: 0.75rem; margin-top: 1rem; text-align: center;">
+                        🔒 Seus dados são processados de forma privada e segura.
+                    </p>
+                </form>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Lokl AI • Campinas, Brasil</p>
+        <div class="footer-content">
+            <p>&copy; 2026 Lokl AI • Inteligência Artificial Soberana</p>
+        </div>
     </footer>
 
-    <script>
-        // Configuração das transições JS
-        ScrollReveal().reveal('.reveal', {
-            delay: 200,
-            distance: '50px',
-            duration: 1000,
-            easing: 'cubic-bezier(0.5, 0, 0, 1)',
-            interval: 100,
-            origin: 'bottom'
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
