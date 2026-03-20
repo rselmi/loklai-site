@@ -26,19 +26,76 @@ body {
     z-index: -1;
 }
 
+/* --- REVISÃO: LOGO TIPOGRÁFICO --- */
 header {
-    padding: 1.5rem 5%;
+    padding: 1rem 5%; /* Ajuste sutil de padding */
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     backdrop-filter: blur(10px);
+    /* background: rgba(5, 5, 5, 0.8); /* Fundo sutil para o blur funcionar */
     position: sticky;
     top: 0; z-index: 100;
+    /* border-bottom: 1px solid var(--border); /* Linha divisória fina */
 }
 
+/* --- CORREÇÃO: LOGO TIPOGRÁFICO --- */
 .logo {
-    font-weight: 800; font-size: 1.5rem; letter-spacing: -1px;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800; /* Extra Bold para mais destaque */
+    font-size: 2.5rem; /* Aumentamos a escala */
+    letter-spacing: -0.01em;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    text-transform: uppercase; /* Caixa alta para diferenciar do texto comum */
+}
+
+/* O "O" como um Frame Tecnológico */
+.logo .logo-frame {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 7px solid var(--accent); /* Apenas o contorno em azul */
+    border-radius: 4px; /* Cantos menos arredondados, mais industrial */
+    margin: 0 2px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.3); /* Brilho sutil (glow) */
+}
+
+/* Um detalhe dentro do frame (opcional, simula um cursor ou núcleo) */
+.logo .logo-frame::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 3px; height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo:hover .logo-frame {
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* Esconde o "O" original do texto no HTML */
+.logo span {
+    display: none;
+}
+
+/* Ajuste para o logo em mobile */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.8rem; /* Diminui um pouco para não vazar a tela */
+    }
+    .logo .logo-frame {
+        width: 22px;
+        height: 22px;
+        border-width: 5px;
+    }
 }
 
 /* Hero Section */
@@ -86,6 +143,8 @@ header {
 .cta-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
+    background: var(--accent);
+    color: #fff; 
 }
 
 /* Infra Crisis Section */
