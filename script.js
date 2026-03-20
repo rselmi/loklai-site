@@ -50,16 +50,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (response.ok) {
-                    // Feedback de Sucesso: Substitui o conteúdo do formulário por uma mensagem amigável
-                    contactForm.innerHTML = `
-                        <div style="text-align:center; padding: 2rem; animation: fadeIn 0.5s ease-out forwards;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
-                            <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.8rem;">Solicitação Recebida!</h3>
-                            <p style="color: var(--text-muted); line-height: 1.6;">
-                                Obrigado, Rafael. Já recebemos seus dados e entraremos em contato via WhatsApp para agendar sua demonstração privada.
-                            </p>
-                        </div>`;
-                } else {
+                                // Extrai o nome digitado para personalizar a resposta
+                                const userName = formData.get('firstName') || 'Parceiro';
+
+                                contactForm.innerHTML = `
+                                    <div style="text-align:center; padding: 2rem; animation: fadeIn 0.5s ease-out forwards;">
+                                        <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                                        <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.8rem;">
+                                            Solicitação Recebida, ${userName}!
+                                        </h3>
+                                        <p style="color: var(--text-muted); line-height: 1.6;">
+                                            Obrigado pelo contato. Já recebemos seus dados e entraremos em contato em breve para agendar sua demonstração do Lokl AI.
+                                        </p>
+                                    </div>`;
+                            } else {
                     const errorData = await response.json();
                     throw new Error(errorData.error || "Erro no envio");
                 }
