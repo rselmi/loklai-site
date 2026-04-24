@@ -133,7 +133,6 @@ header {
     padding: 1.2rem 3.5rem;
     font-size: 1.1rem;
     letter-spacing: 0.02em;
-    text-transform: none; /* Mantém amigável, sem gritar em Caps Lock */
 }
 
 /* Botões */
@@ -198,6 +197,50 @@ header {
     display: block;
 }
 
+/* Open Source */
+.open-source {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.open-source h2 { font-size: clamp(1rem, 5vw, 2rem); margin-bottom: 1.5rem}
+.open-source h2 span { color: var(--text-muted); font-weight: 400; }
+.open-source p { color: var(--text-muted); max-width: 800px; font-size: 1.1rem; margin-bottom: 2.5rem; }
+.open-source .cta-button {
+    padding: 1.2rem 3.5rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    text-transform: none; /* Mantém amigável, sem gritar em Caps Lock */
+}
+
+.opensource { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2.5rem; 
+    margin-top: 2rem;
+}
+
+.opensource-item strong { 
+    display: block; 
+    font-size: 1.5rem; /* Aumentei um pouco o destaque numérico */
+    line-height: 1.5rem;
+    color: var(--accent); 
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.opensource-item span { 
+    font-size: 1.1rem; 
+    color: #a1a1aa; 
+    line-height: 1.4;
+    display: block;
+}
+
+.open-source .cta-container {
+    padding-top: 55px;
+    text-align: center;
+}
 /* Main Features */
 .rag-feature {
     padding: 80px 5%;
