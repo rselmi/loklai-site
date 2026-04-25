@@ -18,7 +18,8 @@ jobs:
           cp -r *.html *.css *.js CNAME assets images dist/ 2>/dev/null || true
           npx html-minifier-terser --input-dir dist --output-dir dist --file-ext html --collapse-whitespace --remove-comments --minify-css true --minify-js true
       - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir:./dist
-          publish_branch: gh-pages
+  with:
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    publish_dir: ./dist
+    publish_branch: gh-pages
+    force_orphan: true
