@@ -1,0 +1,36 @@
+name: Minify and Deploy
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      
+      - name: Minify HTML
+        run: |
+          npx html-minifier-terser --input-dir . --output-dir dist --file-ext html --collapse-whitespace --remove-comments --remove-redundant-attributes --minify-css true --minify-js true || true
+          mkdir -p dist
+          cp -r assets dist/ 2>/dev/null || true
+          cp -r images dist/ 2>/dev/null || true
+          cp CNAME dist/ 2>/dev/null || true
+          cp *.css dist/ 2>/dev/null || true
+          cp *.js dist/ 2>/dev/null || true
+      
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
