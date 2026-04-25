@@ -29,11 +29,13 @@
     <link rel="stylesheet" href="style.css">
 
 <!-- Dados estruturados (JSON-LD) -->
-    <script type="application/ld+json">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "name": "[Rafael Selmi] - Automações Digitais",
+      "name": "Rafael Selmi - Automações Digitais",
       "description": "Implementação de automações com open source e IA local em Campinas",
       "url": "https://loklai.com",
       "telephone": "+55-19-98882-0402",
@@ -41,21 +43,67 @@
         "@type": "PostalAddress",
         "addressLocality": "Campinas",
         "addressRegion": "SP",
-        "addressCountry": "BR",
-        "@type": "FAQPage",
-         "mainEntity": [{
-           "@type": "Question",
-           "name": "É possível fazer automação sem pagar mensalidade?",
-           "acceptedAnswer": {
-             "@type": "Answer",
-             "text": "Sim. Usando ferramentas open source como n8n, Rasa e Ollama, é possível rodar tudo localmente com custo zero de licença."
-           }
-         }]
+        "addressCountry": "BR"
       },
       "areaServed": "Brasil",
       "priceRange": "$$"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "É possível fazer automação sem pagar mensalidade?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim. Usando ferramentas open source como n8n, Rasa e Ollama, é possível rodar tudo localmente com custo zero de licença. Você paga apenas a infraestrutura, sem taxa por usuário ou por execução."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto tempo leva para implementar a primeira automação?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Projetos simples como atendimento via WhatsApp ou envio de e-mails levam de 5 a 10 dias úteis. Projetos com IA local e integração com ERP/CRM levam de 3 a 6 semanas, dependendo da complexidade."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Meus dados ficam seguros com IA local?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim. Com a LOKL AI os modelos rodam dentro da sua empresa, sem enviar dados para nuvem externa. Isso garante privacidade total, conformidade com LGPD e funcionamento mesmo sem internet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Open source não é mais frágil que ferramenta paga?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não. Ferramentas como n8n e Rasa têm comunidades ativas e código auditável. A diferença é que você não fica preso a um fornecedor — qualquer profissional pode dar continuidade ao projeto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qual o ROI típico de um projeto de automação?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clientes relatam economia de 11% a 30% do tempo da equipe, redução de 40% em incidentes de TI e ciclo de vendas até 20% menor. O payback médio é de 3 a 6 meses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vocês atendem fora de Campinas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim. A implementação é 100% remota para qualquer país."
+          }
+        }
+      ]
     }
-    </script>
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -76,69 +124,40 @@
     </section>
 
     <!-- Panorama atual -->
-        <section class="infra-crisis reveal">
-            <div class="crisis-content">
-                <span class="badge">Panorama atual</span>
-                <h2>Automação deixou de ser projeto piloto e virou prioridade de diretoria. O movimento é global, chegou sua vez.</p>
-                <div class="stats">
-                    <div class="stat-item">
-                        <strong>63%</strong>
-                        <span>das organizações planejam adotar IA nos próximos três anos, com crescimento de mercado acima de 120% ano a ano</span>
-                    </div>
-                    <div class="stat-item">
-                        <strong>30%</strong>
-                        <span>das empresas vão automatizar mais da metade das atividades de rede até 2026, e 90% das grandes corporações colocam hiperautomação como prioridade estratégica</span>
-                    </div>
-                    <div class="stat-item">
-                        <strong>67%</strong>
-                        <span>das empresas já usam alguma forma de automação de processos, e 31% automatizaram completamente pelo menos uma função principal<span>
-                    </div>
-                    <div class="stat-item">
-                        <strong>74%</strong>
-                        <span>dos líderes de TI relatam economia de 11 a 30% do tempo dos funcionários com automação 
-</span>
-                    </div>
-                </div>
-
-                <div class="cta-container">
-                    <a href="#contato" class="cta-button">ENTRE EM CONTATO </a>
-                </div>
-
-            </div>
-        </section>
+    <section class="infra-crisis reveal">
+      <div class="crisis-content">
+        <span class="badge">Panorama atual</span>
+        <h2>Automação deixou de ser projeto piloto e virou prioridade de diretoria. O movimento é global, chegou sua vez.</h2>
+        <div class="stats">
+          <div class="stat-item"><strong>63%</strong> <span>das organizações planejam adotar IA nos próximos três anos, com crescimento de mercado acima de 120% ano a ano</span></div>
+          <div class="stat-item"><strong>30%</strong> <span>das empresas vão automatizar mais da metade das atividades de rede até 2026, e 90% das grandes corporações colocam hiperautomação como prioridade estratégica</span></div>
+          <div class="stat-item"><strong>67%</strong> <span>das empresas já usam alguma forma de automação de processos, e 31% automatizaram completamente pelo menos uma função principal</span></div>
+          <div class="stat-item"><strong>74%</strong> <span>dos líderes de TI relatam economia de 11 a 30% do tempo dos funcionários com automação</span></div>
+        </div>
+        <div class="cta-container"><a href="#contato" class="cta-button">ENTRE EM CONTATO</a></div>
+      </div>
+    </section>
 
 <!-- Open Source + LOKL AI -->
-            <section class="open-source">
-            <div class="opensource-content">
-                <span class="badge">Open Source + LOKL AI</span>
-                <h2>A maioria dos profissionais utilizam ferramentas pagas. Elas são boas para quem vende o serviço porque agilizam a entrega. Para quem compra, o preço aparece depois: mensalidades por usuário, por execução, por mensagem. E seus dados, processos e histórico ficam presos na plataforma.</p>
-                <div class="opensource">
-                    <div class="opensource-item">
-                        <strong>Open Source</strong>
-                        <span>Ferramentas abertas, auditáveis e sem licença. Não é por ser “gratuito”. É por ser livre. No futuro, qualquer outro profissional consegue dar continuidade. Você não começa do zero.</span>
-                    </div>
-                    <div class="opensource-item">
-                        <strong>Custo baixo, não escondido</strong>
-                        <span>O objetivo é reduzir seu custo total, não só a implantação. Melhor criar uma solução que rode em servidor local, sem taxa por clique, do que ficar preso à várias assinaturas.</span>
-                    </div>
-                    <div class="opensource-item">
-                        <strong>LOKL AI</strong>
-                        <span>Ao invés de enviar seus dados para uma IA na nuvem, utilizamos modelos de inteligência artificial dentro da sua empresa. É privado, funciona mesmo sem internet, e você sabe exatamente o que está sendo processado. Dá mais trabalho no início, mas vale, pois é você quem colhe: independência, privacidade e controle.<span>
-                    </div>
-                </div>
-
-                <div class="cta-container">
-                    <a href="#contato" class="cta-button">ENTRE EM CONTATO </a>
-                </div>
-
-            </div>
-        </section>
+<section class="open-source">
+  <div class="opensource-content">
+    <span class="badge">Open Source + LOKL AI</span>
+    <h2>A maioria usa ferramentas pagas. Boas para quem vende, caras para quem compra.</h2>
+    <p>Elas agilizam a entrega, mas depois vêm mensalidades por usuário, por execução, por mensagem. E seus dados ficam presos na plataforma.</p>
+    <div class="opensource">
+      <div class="opensource-item"><strong>Open Source</strong> <span>Ferramentas abertas, auditáveis e sem licença. É livre, não apenas gratuito. Qualquer profissional pode dar continuidade.</span></div>
+      <div class="opensource-item"><strong>Custo baixo, não escondido</strong> <span>Reduzimos o custo total. Solução roda em servidor local, sem taxa por clique.</span></div>
+      <div class="opensource-item"><strong>LOKL AI</strong> <span>Modelos de IA rodam dentro da sua empresa. Privado, funciona offline, você controla tudo.</span></div>
+    </div>
+    <div class="cta-container"><a href="#contato" class="cta-button">ENTRE EM CONTATO</a></div>
+  </div>
+</section>
 
 <!-- Exemplos de automações -->
     <section class="infra-crisis reveal">
         <div class="feature-content">
             <span class="badge">Aplicações</span>
-            <h2>Apresentamos os principais exemplos de automações</p>
+            <h2>Apresentamos os principais exemplos de automações</h2>
         </div>
             
             <div class="rag-grid">
