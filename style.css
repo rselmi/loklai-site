@@ -1,0 +1,442 @@
+:root {
+    --primary: #ffffff;
+    --accent: #2563eb;
+    --accent-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    --bg-dark: #050505;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.1);
+    --text-muted: #a1a1aa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Fundo Animado */
+.bg-glow {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% -20%, #1e1b4b 0%, #050505 80%);
+    z-index: -1;
+}
+
+/* --- REVISÃO: LOGO TIPOGRÁFICO --- */
+header {
+    padding: 1rem 5%; /* Ajuste sutil de padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    /* background: rgba(30, 27, 75, 0.3); /* Fundo sutil para o blur funcionar */
+    position: sticky;
+    top: 0; z-index: 100;
+    /* border-bottom: 1px solid var(--border); /* Linha divisória fina */
+}
+
+/* --- CORREÇÃO: LOGO TIPOGRÁFICO --- */
+.logo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800; /* Extra Bold para mais destaque */
+    font-size: 2.5rem; /* Aumentamos a escala */
+    letter-spacing: -0.01em;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    text-transform: uppercase; /* Caixa alta para diferenciar do texto comum */
+}
+
+/* O "O" como um Frame Tecnológico */
+.logo .logo-frame {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 7px solid var(--accent); /* Apenas o contorno em azul */
+    border-radius: 4px; /* Cantos menos arredondados, mais industrial */
+    margin: 0 2px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.3); /* Brilho sutil (glow) */
+}
+
+/* Um detalhe dentro do frame (opcional, simula um cursor ou núcleo) */
+.logo .logo-frame::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 3px; height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo:hover .logo-frame {
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* Esconde o "O" original do texto no HTML */
+.logo span {
+    display: none;
+}
+
+/* Ajuste para o logo em mobile */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.8rem; /* Diminui um pouco para não vazar a tela */
+    }
+    .logo .logo-frame {
+        width: 22px;
+        height: 22px;
+        border-width: 5px;
+    }
+}
+
+/* Hero Section */
+.hero {
+    padding: 130px 5% 80px; /* Aumentamos o respiro superior */
+    text-align: center;
+    max-width: 1024px; /* Estreitamos para a leitura não ficar cansativa */
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: clamp(2.8rem, 7vw, 4.5rem); /* Fonte levemente maior */
+    font-weight: 800;
+    line-height: 1.05; /* Título mais compacto e imponente */
+    letter-spacing: -0.04em; /* Letras mais próximas, estilo Apple/Premium */
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.35rem; /* Texto de apoio mais legível */
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto 3.5rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+.hero .cta-container {
+    padding-top: 30px;
+}
+
+.hero .cta-button {
+    padding: 1.2rem 3.5rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+}
+
+/* Botões */
+.cta-button {
+    background: #ffffff; color: #000000;
+    padding: 1rem 3rem; border-radius: 100px;
+    text-decoration: none; font-weight: 600;
+    transition: all 0.3s ease; display: inline-block;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
+    background: var(--accent);
+    color: #fff; 
+}
+
+/* Infra Crisis Section */
+.infra-crisis {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.badge {
+    background: var(--accent);
+    padding: 0.4rem 1rem; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; display: inline-block; margin-bottom: 1.5rem;
+}
+
+.infra-crisis h2 { font-size: clamp(1rem, 5vw, 2rem); margin-bottom: 1.5rem}
+.infra-crisis h2 span { color: var(--text-muted); font-weight: 400; }
+.infra-crisis p { color: var(--text-muted); max-width: 800px; font-size: 1.1rem; margin-bottom: 2.5rem; }
+.infra-crisis .cta-button {
+    padding: 1.2rem 3.5rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    text-transform: none; /* Mantém amigável, sem gritar em Caps Lock */
+}
+
+/* Ajuste para 4 colunas de impacto */
+.stats { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2.5rem; 
+    margin-top: 2rem;
+}
+
+.stat-item strong { 
+    display: block; 
+    font-size: 2.2rem; /* Aumentei um pouco o destaque numérico */
+    color: var(--accent); 
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.stat-item span { 
+    font-size: 1.1rem; 
+    color: #a1a1aa; 
+    line-height: 1.4;
+    display: block;
+}
+
+/* Open Source */
+.open-source {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.open-source h2 { font-size: clamp(1rem, 5vw, 2rem); margin-bottom: 1.5rem}
+.open-source h2 span { color: var(--text-muted); font-weight: 400; }
+.open-source p { color: var(--text-muted); max-width: 800px; font-size: 1.1rem; margin-bottom: 2.5rem; }
+.open-source .cta-button {
+    padding: 1.2rem 3.5rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    text-transform: none; /* Mantém amigável, sem gritar em Caps Lock */
+}
+
+.opensource { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2.5rem; 
+    margin-top: 2rem;
+}
+
+.opensource-item strong { 
+    display: block; 
+    font-size: 1.5rem; /* Aumentei um pouco o destaque numérico */
+    line-height: 1.5rem;
+    color: var(--accent); 
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.opensource-item span { 
+    font-size: 1.1rem; 
+    color: #a1a1aa; 
+    line-height: 1.4;
+    display: block;
+}
+
+.open-source .cta-container {
+    padding-top: 55px;
+    text-align: center;
+}
+/* Main Features */
+.rag-feature {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.rag-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.rag-item {
+    background: var(--glass);
+    padding: 2.5rem;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease;
+}
+
+.rag-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.rag-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.rag-item h4 {
+    margin-bottom: 0.8rem;
+    color: var(--primary);
+}
+
+.rag-item p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.rag-item p span {
+    color: white;
+    font-weight: 400;
+}
+
+/* Features */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem; padding: 4rem 5%;
+}
+
+.feature-card {
+    background: var(--glass);
+    padding: 3rem 2rem; 
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Garante que todos os cards tenham a mesma altura */
+}
+
+.feature-card h3 { 
+    font-size: 1.4rem; 
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.02em; /* Títulos mais elegantes */
+}
+
+.feature-card p { 
+    color: var(--text-muted); 
+    font-size: 1rem; 
+    line-height: 1.5;
+}
+
+.infra-crisis .cta-container {
+    padding-top: 55px;
+    text-align: center;
+}
+
+/* Formulário de Contacto */
+.contact-section { 
+    padding: 100px 5%; 
+    display: flex;
+    justify-content: center; /* Garante centralização horizontal */
+}
+
+.contact-container {
+    width: 100%;
+    max-width: 650px; 
+    background: var(--glass); 
+    padding: 4rem 3rem;
+    border-radius: 32px; 
+    border: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.contact-container h2 { 
+    text-align: center; 
+    margin-bottom: 0.5rem; 
+    font-size: 2.2rem; 
+    letter-spacing: -1px;
+}
+
+.contact-container p { 
+    text-align: center; 
+    color: var(--text-muted); 
+    margin-bottom: 3rem; 
+    font-size: 1.1rem;
+}
+
+.contact-form { 
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; 
+}
+
+.form-row { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 1.5rem; 
+}
+
+.form-group { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.6rem; 
+}
+
+.form-group label { 
+    font-size: 0.85rem; 
+    font-weight: 600; 
+    color: #e4e4e7; 
+    margin-left: 4px;
+}
+
+.form-group input {
+    background: rgba(255, 255, 255, 0.03); 
+    border: 1px solid var(--border);
+    padding: 1.1rem; 
+    border-radius: 14px; 
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.cta-button-form {
+    background: #fff; 
+    color: #000; 
+    border: none;
+    padding: 1.2rem; 
+    border-radius: 14px; 
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer; 
+    margin-top: 1rem; 
+    transition: all 0.3s ease;
+}
+
+.cta-button-form:hover { 
+    background: var(--accent); 
+    color: #fff; 
+    transform: translateY(-2px);
+}
+
+/* Ajuste Responsivo */
+@media (max-width: 600px) {
+    .form-row { 
+        grid-template-columns: 1fr; 
+    }
+    .contact-container {
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+/* Footer */
+footer { padding: 4rem 5%; text-align: center; border-top: 1px solid var(--border); color: #52525b; }
+
+/* Animações */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+    .form-row { grid-template-columns: 1fr; }
+    .hero { padding-top: 80px; }
+}
