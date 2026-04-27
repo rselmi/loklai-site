@@ -285,51 +285,52 @@
 
     <script src="/script.js"></script>
 
-    <!-- LOKLAI WIDGET 1-CLIQUE - INICIO -->
-    <style>
-    .lk-chat-btn{position:fixed;bottom:24px;right:24px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15);cursor:pointer;z-index:9999;transition:.2s}
-    .lk-chat-btn:hover{transform:scale(1.05)}
-    .lk-chat{position:fixed;bottom:100px;right:24px;width:360px;max-width:calc(100% - 48px);height:480px;background:#fff;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.2);display:none;flex-direction:column;overflow:hidden;z-index:9999;font-family:system-ui,-apple-system,sans-serif}
-    .lk-chat.open{display:flex}
-    .lk-h{background:#075E54;color:#fff;padding:16px;display:flex;align-items:center;gap:12px}
-    .lk-h h4{margin:0;font-size:16px}
-    .lk-h span{font-size:12px;opacity:.8}
-    .lk-m{flex:1;padding:16px;overflow-y:auto;background:#E5DDD5}
-    .lk-b{max-width:80%;padding:10px 14px;border-radius:8px;margin-bottom:8px;font-size:14px;line-height:1.4}
-    .lk-bot{background:#fff;border-top-left-radius:0}
-    .lk-user{background:#DCF8C6;margin-left:auto;border-top-right-radius:0}
-    .lk-i{display:flex;padding:12px;border-top:1px solid #eee;gap:8px}
-    .lk-i input{flex:1;padding:10px;border:1px solid #ddd;border-radius:20px;outline:none}
-    .lk-i button{background:#25D366;color:#fff;border:none;padding:10px 16px;border-radius:20px;cursor:pointer}
-    </style>
-
-    <div class="lk-chat-btn" onclick="lkToggle()">
-      <svg width="32" height="32" fill="white" viewBox="0 0 24 24"><path d="M17.5 14.3c-.3-.2-1.7-.8-2-1-.3-.2-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-1-.3-2-1-2.7-1.8-.7-.7-1.2-1.6-1.3-1.8-.1-.3 0-.5.1-.7l.5-.6c.1-.2.2-.4.2-.6 0-.2 0-.4-.1-.5L9 7.2c-.2-.5-.5-.4-.7-.4h-.6C7.4 6.8 7 7 6.8 7.4c-.5 1-.5 2 0 3.6 1.3 2.2 3 4.7 4.6 1.9 1.2 2.7 1.3 3.6 1.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4 0-.2-.3-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 3.9 4-1.3A10 10 0 1 0 12 2z"/></svg>
+    <!-- WIDGET LOKLAI -->
+    <div class="lk-chat-btn" id="lkBtn" aria-label="Abrir chat">
+      <svg viewBox="0 0 24 24"><path d="M17.5 14.3c-.3-.2-1.7-.8-2-1-.3-.2-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-1-.3-2-1-2.7-1.8-.7-.7-1.2-1.6-1.3-1.8-.1-.3 0-.5.1-.7l.5-.6c.1-.2.2-.4.2-.6 0-.2 0-.4-.1-.5L9 7.2c-.2-.5-.5-.4-.7-.4h-.6C7.4 6.8 7 7 6.8 7.4c-.5 1-.5 2 0 3.6.7 1.3 1.6 2.5 2.7 3.6 1.1 1.1 2.3 2 3.6 2.7 1.6.5 2.6.5 3.6 0.4-.2.6-.6.4-1l-.2-.6c-.1-.2-.3-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 3.9 4-1.3A10 10 0 1 0 12 2z"/></svg>
     </div>
 
     <div class="lk-chat" id="lkChat">
       <div class="lk-h">
-        <div style="width:40px;height:40px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center">L</div>
-        <div><h4>Loklai</h4><span>Online agora</span></div>
+        <div class="lk-h-avatar">L</div>
+        <div><h4>Loklai</h4><span>Responde em segundos</span></div>
       </div>
       <div class="lk-m" id="lkMsgs"></div>
       <div class="lk-i">
-        <input id="lkInput" placeholder="Digite sua mensagem..." onkeypress="if(event.key==='Enter')lkSend()">
-        <button onclick="lkSend()">Enviar</button>
+        <input id="lkInput" placeholder="Digite..." autocomplete="off">
+        <button id="lkSend">Enviar</button>
       </div>
     </div>
 
     <script>
-    // === CONFIGURE AQUI ===
-    const LK_PHONE = '5519988820402'; // <-- SEU WHATSAPP COM DDI
-    const LK_NAME = 'LOKL AI';
-    // ======================
-    let lkStep=0, lkNome='';
-    function lkToggle(){document.getElementById('lkChat').classList.toggle('open');if(lkStep===0){setTimeout(()=>lkBot('Olá! 👋 Sou o assistente da '+LK_NAME+'. Como posso te ajudar?'),300);lkStep=1;console.log('clicou_widget')}}
-    function lkBot(t){const m=document.getElementById('lkMsgs');m.innerHTML+=`<div class="lk-b lk-bot">${t}</div>`;m.scrollTop=m.scrollHeight}
-    function lkUser(t){const m=document.getElementById('lkMsgs');m.innerHTML+=`<div class="lk-b lk-user">${t}</div>`;m.scrollTop=m.scrollHeight}
-    function lkSend(){const i=document.getElementById('lkInput');const t=i.value.trim();if(!t)return;i.value='';lkUser(t);console.log('iniciou_conversa');if(lkStep===1){lkNome=t.split(' ')[0];setTimeout(()=>lkBot(`Prazer, ${lkNome}! O que você precisa?`),600);lkStep=2}else if(lkStep===2){setTimeout(()=>{lkBot(`Perfeito! Posso te mandar um resumo no WhatsApp e continuar por lá?`);document.getElementById('lkMsgs').innerHTML+=`<div style="text-align:center;margin:12px 0"><a href="https://wa.me/${LK_PHONE}?text=Oi, sou ${encodeURIComponent(lkNome)}. Vim do site e falei sobre: ${encodeURIComponent(t)}" target="_blank" style="background:#25D366;color:#fff;padding:10px 20px;border-radius:20px;text-decoration:none;font-size:14px;display:inline-block">Continuar no WhatsApp</a></div>`},800);lkStep=3}}
+    (() => {
+      const PHONE = '5519988820402'; // ex: 5511999999999
+      const msgs = document.getElementById('lkMsgs');
+      const input = document.getElementById('lkInput');
+      let step = 0, nome = '';
+
+      const bot = t => { msgs.insertAdjacentHTML('beforeend', `<div class="lk-b lk-bot">${t}</div>`); msgs.scrollTop = msgs.scrollHeight; };
+      const user = t => { msgs.insertAdjacentHTML('beforeend', `<div class="lk-b lk-user">${t}</div>`); msgs.scrollTop = msgs.scrollHeight; };
+
+      document.getElementById('lkBtn').onclick = () => {
+        document.getElementById('lkChat').classList.toggle('open');
+        if(step===0){ setTimeout(()=>bot('Hello! 👋 I´m LOKL AI assistant. What´s your name?'),300); step=1; }
+      };
+      const send = () => {
+        const t = input.value.trim(); if(!t) return; input.value=''; user(t);
+        if(step===1){ nome=t.split(' ')[0]; setTimeout(()=>bot(`Prazer, ${nome}! How can I help you?`),600); step=2; }
+        else if(step===2){
+          setTimeout(()=>{
+            bot('Perfect. Can I transfer our conversation to your WhatsApp?');
+            msgs.insertAdjacentHTML('beforeend', `<div class="lk-cta"><a href="https://wa.me/${PHONE}?text=${encodeURIComponent(`Hi, I´m ${nome} from site loklai.com. Subject: ${t}`)}" target="_blank" rel="noopener">Continue on WhatsApp</a></div>`);
+            msgs.scrollTop = msgs.scrollHeight;
+          },700); step=3;
+        }
+      };
+      document.getElementById('lkSend').onclick = send;
+      input.onkeypress = e => e.key==='Enter' && send();
+    })();
     </script>
-    <!-- LOKLAI WIDGET 1-CLIQUE - FIM -->
+
 </body>
 </html>

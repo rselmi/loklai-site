@@ -440,3 +440,34 @@ footer { padding: 4rem 5%; text-align: center; border-top: 1px solid var(--borde
     .form-row { grid-template-columns: 1fr; }
     .hero { padding-top: 80px; }
 }
+
+/* ===== LOKLAI WIDGET WHATSAPP - 1 CLIQUE ===== */
+.lk-chat-btn{position:fixed;bottom:24px;right:24px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.25);cursor:pointer;z-index:9999;transition:transform.2s}
+.lk-chat-btn:hover{transform:scale(1.07)}
+.lk-chat-btn svg{width:32px;height:32px;fill:#fff}
+
+.lk-chat{position:fixed;bottom:100px;right:24px;width:360px;max-width:calc(100vw - 32px);height:500px;background:#0b141a;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.4);display:none;flex-direction:column;overflow:hidden;z-index:9999;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;border:1px solid #222d34}
+.lk-chat.open{display:flex;animation:lkUp.25s ease}
+
+@keyframes lkUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.lk-h{background:#202c33;color:#e9edef;padding:14px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #222d34}
+.lk-h-avatar{width:40px;height:40px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;color:#0b141a}
+.lk-h h4{margin:0;font-size:15px;font-weight:600}
+.lk-h span{font-size:12px;color:#8696a0}
+
+.lk-m{flex:1;padding:16px;overflow-y:auto;background:#0b141a;background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='none'/%3E%3Cpath d='M20 20c10-10 30-10 40 0s10 30 0 40-30 10-40 0-10-30 0-40z' fill='%23111b21' fill-opacity='0.3'/%3E%3C/svg%3E")}
+.lk-b{max-width:78%;padding:9px 12px;border-radius:8px;margin-bottom:10px;font-size:14px;line-height:1.4;word-wrap:break-word}
+.lk-bot{background:#202c33;color:#e9edef;border-top-left-radius:2px}
+.lk-user{background:#005c4b;color:#e9edef;margin-left:auto;border-top-right-radius:2px}
+.lk-cta{text-align:center;margin:14px 0}
+.lk-cta a{background:#25D366;color:#0b141a;padding:11px 20px;border-radius:24px;text-decoration:none;font-size:14px;font-weight:600;display:inline-block;transition:.2s}
+.lk-cta a:hover{background:#1ebe5d}
+
+.lk-i{display:flex;padding:10px;background:#202c33;gap:8px;align-items:center;border-top:1px solid #222d34}
+.lk-i input{flex:1;padding:11px 14px;border:none;border-radius:20px;outline:none;background:#2a3942;color:#e9edef;font-size:14px}
+.lk-i input::placeholder{color:#8696a0}
+.lk-i button{background:#25D366;color:#0b141a;border:none;padding:10px 16px;border-radius:20px;cursor:pointer;font-weight:600;font-size:14px}
+.lk-i button:hover{background:#1ebe5d}
+
+@media(max-width:480px){.lk-chat{right:16px;left:16px;width:auto;bottom:84px;height:70vh}}
