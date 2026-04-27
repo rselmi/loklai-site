@@ -315,7 +315,7 @@
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', function() {
       const PHONE = '5519988820402';
       const WORKER_URL = 'https://loklai-abandono.rselmi.workers.dev';
 
@@ -325,51 +325,63 @@
       const input = document.getElementById('lkInput');
       const sendBtn = document.getElementById('lkSend');
 
+      if(!input){ console.error('Loklai: input não encontrado'); return; }
+
       let step = 0, nome = '';
 
-      const bot = t => { msgs.insertAdjacentHTML('beforeend', `<div class="lk-b lk-bot">${t}</div>`); msgs.scrollTop = msgs.scrollHeight; };
-      const user = t => { msgs.insertAdjacentHTML('beforeend', `<div class="lk-b lk-user">${t}</div>`); msgs.scrollTop = msgs.scrollHeight; };
+      function bot(t){ msgs.insertAdjacentHTML('beforeend','<div class="lk-b lk-bot">'+t+'</div>'); msgs.scrollTop=msgs.scrollHeight; }
+      function user(t){ msgs.insertAdjacentHTML('beforeend','<div class="lk-b lk-user">'+t+'</div>'); msgs.scrollTop=msgs.scrollHeight; }
 
-      function registraAbandono(motivo) {
-        if(!nome) return; // só envia se já digitou nome
-        const data = { nome, etapa: step, pagina: location.pathname, motivo };
-        console.log('ENVIANDO ABANDONO:', data); // veja no console
-        // usa fetch com keepalive (funciona ao fechar)
-        fetch(WORKER_URL, {
-          method: 'POST',
-          body: JSON.stringify(data),
-          keepalive: true,
-          mode: 'no-cors'
-        });
+      function registraAbandono(motivo){
+        if(!nome || step>=3) return;
+        const data = {nome:nome, etapa:step, pagina:location.pathname, motivo:motivo};
+        console.log('[Loklai] abandono', data);
+        try{
+          fetch(WORKER_URL, {method:'POST', body:JSON.stringify(data), keepalive:true, mode:'no-cors'});
+        }catch(e){}
       }
 
-      btn.onclick = () => {
+      btn.addEventListener('click', function(){
         chat.classList.toggle('open');
-        if(chat.classList.contains('open') && step===0){
-          setTimeout(()=>bot('Olá! 👋 Qual seu nome?'),200); step=1; input.focus();
+        if(chat.classList.contains('open')){
+          setTimeout(function(){ input.focus(); }, 100);
+          if(step===0){ bot('Olá! 👋 Qual seu nome?'); step=1; }
         }
-      };
+      });
 
-      const send = () => {
-        const t = input.value.trim(); if(!t) return;
-        input.value=''; user(t);
-        if(step===1){ nome=t.split(' ')[0]; bot(`Prazer, ${nome}! O que precisa?`); step=2;
-          // agenda abandono em 30s
-          setTimeout(()=>registraAbandono('timeout_30s'),30000);
+      function enviar(){
+        const texto = input.value.trim();
+        if(!texto) return;
+        input.value = '';
+        user(texto);
+
+        if(step===1){
+          nome = texto.split(' ')[0];
+          setTimeout(function(){ bot('Prazer, '+nome+'! O que você precisa hoje?'); }, 400);
+          step = 2;
+          setTimeout(function(){ registraAbandono('timeout_30s'); }, 30000);
+        }else if(step===2){
+          bot('Perfeito, abrindo WhatsApp...');
+          const link = 'https://wa.me/'+PHONE+'?text='+encodeURIComponent('Oi, sou '+nome+' do site. Assunto: '+texto);
+          msgs.insertAdjacentHTML('beforeend','<div class="lk-cta"><a href="'+link+'" target="_blank" rel="noopener">Continuar no WhatsApp</a></div>');
+          msgs.scrollTop = msgs.scrollHeight;
+          step = 3;
         }
-        else if(step===2){ bot('Abrindo WhatsApp...');
-          msgs.insertAdjacentHTML('beforeend', `<div class="lk-cta"><a href="https://wa.me/${PHONE}?text=Oi sou ${nome}" target="_blank">Continuar</a></div>`); step=3; }
-      };
+      }
 
-      sendBtn.onclick = send;
-      input.onkeydown = e => e.key==='Enter' && (e.preventDefault(), send());
+      sendBtn.addEventListener('click', enviar);
+      input.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' &&!e.shiftKey){ e.preventDefault(); enviar(); }
+      });
 
-      // NOVO: dispara ao sair
-      document.addEventListener('visibilitychange', () => { if(document.hidden) registraAbandono('visibility_hidden'); });
-      window.addEventListener('pagehide', () => registraAbandono('pagehide'));
+      // abandono ao sair
+      document.addEventListener('visibilitychange', function(){ if(document.hidden) registraAbandono('saiu'); });
+      window.addEventListener('pagehide', function(){ registraAbandono('fechou'); });
 
-      // TESTE MANUAL: digite no console: testaAbandono()
-      window.testaAbandono = () => { nome='TesteManual'; step=2; registraAbandono('teste'); };
+      // teste rápido no console
+      window.lkTeste = function(){ nome='Teste'; step=2; registraAbandono('teste_manual'); };
+
+      console.log('Loklai widget OK - input ativo');
     });
     </script>
 
