@@ -32,14 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const t = {
             en: {
                 sending: "Sending...",
-                successTitle: (n) => `✅ Request Received, ${n}!`,
+                successTitle: (n) => `Request Received, ${n}!`,
                 successText: "Thank you for reaching out. We've received your details and will be in touch soon.",
                 error: "Error sending. Please try again.",
                 fallbackName: "there"
             },
             pt: {
                 sending: "Enviando...",
-                successTitle: (n) => `✅ Solicitação Recebida, ${n}!`,
+                successTitle: (n) => `Solicitação Recebida, ${n}!`,
                 successText: "Obrigado pelo contato. Recebemos seus dados e entraremos em contato em breve.",
                 error: "Erro ao enviar. Tente novamente.",
                 fallbackName: "Parceiro"
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     contactForm.innerHTML = `
                         <div style="text-align:center; padding: 2rem; animation: fadeIn 0.5s ease-out forwards;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem;">âœ…</div>
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">&#9989;</div>
                             <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.8rem;">
                                 ${t.successTitle(userName)}
                             </h3>
