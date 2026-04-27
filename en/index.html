@@ -303,33 +303,55 @@
     </div>
 
     <script>
-    (() => {
-      const PHONE = '5519988820402'; // ex: 5511999999999
+    document.addEventListener('DOMContentLoaded', () => {
+      const PHONE = '5519988820402'; // troque pelo seu 55...
+      const chat = document.getElementById('lkChat');
+      const btn = document.getElementById('lkBtn');
       const msgs = document.getElementById('lkMsgs');
       const input = document.getElementById('lkInput');
+      const sendBtn = document.getElementById('lkSend');
+      const WORKER_URL = 'https://loklai-abandono.rselmi.workers.dev';
+
       let step = 0, nome = '';
 
       const bot = t => { msgs.insertAdjacentHTML('beforeend', `<div class="lk-b lk-bot">${t}</div>`); msgs.scrollTop = msgs.scrollHeight; };
       const user = t => { msgs.insertAdjacentHTML('beforeend', `<div class="lk-b lk-user">${t}</div>`); msgs.scrollTop = msgs.scrollHeight; };
 
-      document.getElementById('lkBtn').onclick = () => {
-        document.getElementById('lkChat').classList.toggle('open');
-        if(step===0){ setTimeout(()=>bot('Hello! 👋 I´m LOKL AI assistant. What´s your name?'),300); step=1; }
-      };
+      btn.addEventListener('click', () => {
+        chat.classList.toggle('open');
+        if (chat.classList.contains('open')) {
+          input.focus(); // <-- agora foca automaticamente
+          if(step===0){ setTimeout(()=>bot('Hello! 👋 I´m LOKL AI assistant. What´s your name?'),200); step=1; }
+        }
+      });
+
       const send = () => {
-        const t = input.value.trim(); if(!t) return; input.value=''; user(t);
-        if(step===1){ nome=t.split(' ')[0]; setTimeout(()=>bot(`Prazer, ${nome}! How can I help you?`),600); step=2; }
-        else if(step===2){
+        const t = input.value.trim();
+        if(!t) return;
+        input.value = '';
+        user(t);
+
+        if(step===1){
+          nome = t.split(' ')[0];
+          setTimeout(()=>bot(`Nice to meet you, ${nome}! How can I help you?`),500);
+          step=2;
+        } else if(step===2){
           setTimeout(()=>{
             bot('Perfect. Can I transfer our conversation to your WhatsApp?');
-            msgs.insertAdjacentHTML('beforeend', `<div class="lk-cta"><a href="https://wa.me/${PHONE}?text=${encodeURIComponent(`Hi, I´m ${nome} from site loklai.com. Subject: ${t}`)}" target="_blank" rel="noopener">Continue on WhatsApp</a></div>`);
+            msgs.insertAdjacentHTML('beforeend',
+              `<div class="lk-cta"><a href="https://wa.me/${PHONE}?text=${encodeURIComponent(`Hello, I´m ${nome} from site loklai.com. Subject: ${t}`)}" target="_blank" rel="noopener">Continuar no WhatsApp</a></div>`);
             msgs.scrollTop = msgs.scrollHeight;
-          },700); step=3;
+          },600);
+          step=3;
         }
       };
-      document.getElementById('lkSend').onclick = send;
-      input.onkeypress = e => e.key==='Enter' && send();
-    })();
+
+      sendBtn.addEventListener('click', send);
+      input.addEventListener('keydown', e => { if(e.key === 'Enter' &&!e.shiftKey){ e.preventDefault(); send(); }});
+
+      // debug rápido
+      console.log('Loklai widget carregado ✓ - input pronto');
+    });
     </script>
 
 </body>
