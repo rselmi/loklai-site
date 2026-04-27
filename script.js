@@ -32,14 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const t = {
             en: {
                 sending: "Sending...",
-                successTitle: (n) => `Request Received, ${n}!`,
+                successTitle: (n) => `✅ Request Received, ${n}!`,
                 successText: "Thank you for reaching out. We've received your details and will be in touch soon.",
                 error: "Error sending. Please try again.",
                 fallbackName: "there"
             },
             pt: {
                 sending: "Enviando...",
-                successTitle: (n) => `SolicitaÃ§Ã£o Recebida, ${n}!`,
+                successTitle: (n) => `✅ Solicitação Recebida, ${n}!`,
                 successText: "Obrigado pelo contato. Recebemos seus dados e entraremos em contato em breve.",
                 error: "Erro ao enviar. Tente novamente.",
                 fallbackName: "Parceiro"
