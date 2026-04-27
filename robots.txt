@@ -1,3 +1,7 @@
+# As a condition of accessing this website, you agree to these content signals:
+# search = build a search index
+# ai-train = train AI models
 User-agent: *
+Content-Signal: search=yes, ai-train=no
 Allow: /
 Sitemap: https://loklai.com/sitemap.xml
