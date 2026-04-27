@@ -316,53 +316,60 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const PHONE = '5519988820402'; // troque pelo seu 55...
+      const PHONE = '5519988820402';
+      const WORKER_URL = 'https://loklai-abandono.rselmi.workers.dev';
+
       const chat = document.getElementById('lkChat');
       const btn = document.getElementById('lkBtn');
       const msgs = document.getElementById('lkMsgs');
       const input = document.getElementById('lkInput');
       const sendBtn = document.getElementById('lkSend');
-      const WORKER_URL = 'https://loklai-abandono.rselmi.workers.dev';
 
       let step = 0, nome = '';
 
       const bot = t => { msgs.insertAdjacentHTML('beforeend', `<div class="lk-b lk-bot">${t}</div>`); msgs.scrollTop = msgs.scrollHeight; };
       const user = t => { msgs.insertAdjacentHTML('beforeend', `<div class="lk-b lk-user">${t}</div>`); msgs.scrollTop = msgs.scrollHeight; };
 
-      btn.addEventListener('click', () => {
+      function registraAbandono(motivo) {
+        if(!nome) return; // só envia se já digitou nome
+        const data = { nome, etapa: step, pagina: location.pathname, motivo };
+        console.log('ENVIANDO ABANDONO:', data); // veja no console
+        // usa fetch com keepalive (funciona ao fechar)
+        fetch(WORKER_URL, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          keepalive: true,
+          mode: 'no-cors'
+        });
+      }
+
+      btn.onclick = () => {
         chat.classList.toggle('open');
-        if (chat.classList.contains('open')) {
-          input.focus(); // <-- agora foca automaticamente
-          if(step===0){ setTimeout(()=>bot('Olá! 👋 Sou o assistente da LOKL AI. Qual seu nome?'),200); step=1; }
-        }
-      });
-
-      const send = () => {
-        const t = input.value.trim();
-        if(!t) return;
-        input.value = '';
-        user(t);
-
-        if(step===1){
-          nome = t.split(' ')[0];
-          setTimeout(()=>bot(`Prazer, ${nome}! Em que posso ajudar?`),500);
-          step=2;
-        } else if(step===2){
-          setTimeout(()=>{
-            bot('Perfeito. Posso transferir nossa conversa para seu WhatsApp?');
-            msgs.insertAdjacentHTML('beforeend',
-              `<div class="lk-cta"><a href="https://wa.me/${PHONE}?text=${encodeURIComponent(`Oi, sou ${nome} do site loklai.com. Assunto: ${t}`)}" target="_blank" rel="noopener">Continuar no WhatsApp</a></div>`);
-            msgs.scrollTop = msgs.scrollHeight;
-          },600);
-          step=3;
+        if(chat.classList.contains('open') && step===0){
+          setTimeout(()=>bot('Olá! 👋 Qual seu nome?'),200); step=1; input.focus();
         }
       };
 
-      sendBtn.addEventListener('click', send);
-      input.addEventListener('keydown', e => { if(e.key === 'Enter' &&!e.shiftKey){ e.preventDefault(); send(); }});
+      const send = () => {
+        const t = input.value.trim(); if(!t) return;
+        input.value=''; user(t);
+        if(step===1){ nome=t.split(' ')[0]; bot(`Prazer, ${nome}! O que precisa?`); step=2;
+          // agenda abandono em 30s
+          setTimeout(()=>registraAbandono('timeout_30s'),30000);
+        }
+        else if(step===2){ bot('Abrindo WhatsApp...');
+          msgs.insertAdjacentHTML('beforeend', `<div class="lk-cta"><a href="https://wa.me/${PHONE}?text=Oi sou ${nome}" target="_blank">Continuar</a></div>`); step=3; }
+      };
 
-      // debug rápido
-      console.log('Loklai widget carregado ✓ - input pronto');
+      sendBtn.onclick = send;
+      input.onkeydown = e => e.key==='Enter' && (e.preventDefault(), send());
+
+      // NOVO: dispara ao sair
+      document.addEventListener('visibilitychange', () => { if(document.hidden) registraAbandono('visibility_hidden'); });
+      window.addEventListener('pagehide', () => registraAbandono('pagehide'));
+
+      // TESTE MANUAL: digite no console: testaAbandono()
+      window.testaAbandono = () => { nome='TesteManual'; step=2; registraAbandono('teste'); };
     });
     </script>
 
