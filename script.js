@@ -1,12 +1,11 @@
 /**
- * LOKL AI - Scripts de Interface e Formulário
- * Foco: Performance e Experiência do Usuário (UX)
+ * LOKL AI - Scripts de Interface e FormulÃ¡rio
+ * Foco: Performance e ExperiÃªncia do UsuÃ¡rio (UX)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. ANIMAÇÃO AO SCROLL (REVEAL)
-    // Faz com que os elementos com a classe .reveal apareçam ao rolar a página
+    // 1. ANIMAÃ‡ÃƒO AO SCROLL (REVEAL)
     const revealElements = document.querySelectorAll('.reveal');
 
     const revealOnScroll = () => {
@@ -21,23 +20,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Executa ao carregar e ao rolar
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll();
 
-    // 2. INTERCEPTAÇÃO DO FORMULÁRIO (FORMSPREE + AJAX)
-    // Garante que o profissional autônomo não saia do site ao enviar os dados
+    // 2. INTERCEPTAÃ‡ÃƒO DO FORMULÃRIO (FORMSPREE + AJAX)
     const contactForm = document.querySelector('.contact-form');
 
     if (contactForm) {
+        // --- CASE DE TRADUÃ‡ÃƒO ---
+        const lang = document.documentElement.lang?.toLowerCase().startsWith('en') ? 'en' : 'pt';
+        const t = {
+            en: {
+                sending: "Sending...",
+                successTitle: (n) => `Request Received, ${n}!`,
+                successText: "Thank you for reaching out. We've received your details and will be in touch soon to schedule your Lokl AI demo.",
+                error: "Error sending. Please try again.",
+                fallbackName: "there"
+            },
+            pt: {
+                sending: "Enviando...",
+                successTitle: (n) => `SolicitaÃ§Ã£o Recebida, ${n}!`,
+                successText: "Obrigado pelo contato. JÃ¡ recebemos seus dados e entraremos em contato em breve para agendar sua demonstraÃ§Ã£o do Lokl AI.",
+                error: "Erro ao enviar. Tente novamente.",
+                fallbackName: "Parceiro"
+            }
+        }[lang];
+
         contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Impede o redirecionamento padrão do navegador
+            e.preventDefault();
             
             const btn = contactForm.querySelector('button');
             const originalBtnText = btn.textContent;
             
-            // Estado de carregamento
-            btn.textContent = "Enviando...";
+            btn.textContent = t.sending;
             btn.disabled = true;
 
             const formData = new FormData(contactForm);
@@ -50,27 +65,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (response.ok) {
-                                // Extrai o nome digitado para personalizar a resposta
-                                const userName = formData.get('firstName') || 'Parceiro';
+                    const userName = formData.get('firstName') || t.fallbackName;
 
-                                contactForm.innerHTML = `
-                                    <div style="text-align:center; padding: 2rem; animation: fadeIn 0.5s ease-out forwards;">
-                                        <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
-                                        <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.8rem;">
-                                            Solicitação Recebida, ${userName}!
-                                        </h3>
-                                        <p style="color: var(--text-muted); line-height: 1.6;">
-                                            Obrigado pelo contato. Já recebemos seus dados e entraremos em contato em breve para agendar sua demonstração do Lokl AI.
-                                        </p>
-                                    </div>`;
-                            } else {
+                    contactForm.innerHTML = `
+                        <div style="text-align:center; padding: 2rem; animation: fadeIn 0.5s ease-out forwards;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">âœ…</div>
+                            <h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.8rem;">
+                                ${t.successTitle(userName)}
+                            </h3>
+                            <p style="color: var(--text-muted); line-height: 1.6;">
+                                ${t.successText}
+                            </p>
+                        </div>`;
+                } else {
                     const errorData = await response.json();
-                    throw new Error(errorData.error || "Erro no envio");
+                    throw new Error(errorData.error || "Error");
                 }
             } catch (err) {
-                // Em caso de erro, devolve o botão ao estado original
-                console.error("Erro no formulário:", err);
-                btn.textContent = "Erro ao enviar. Tente novamente.";
+                console.error("Form error:", err);
+                btn.textContent = t.error;
                 btn.disabled = false;
                 
                 setTimeout(() => {
@@ -81,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Estilo de animação rápida para a mensagem de sucesso
+// Estilo de animaÃ§Ã£o rÃ¡pida para a mensagem de sucesso
 const style = document.createElement('style');
 style.innerHTML = `
     @keyframes fadeIn {
