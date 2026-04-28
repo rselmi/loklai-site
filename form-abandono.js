@@ -3,7 +3,7 @@
  * Funciona em PT e EN - dispara sÃ³ com Nome + Sobrenome
  */
 document.addEventListener('DOMContentLoaded', function() {
-  const WORKER_URL = 'https://loklai-abandono.rselmi.workers.dev';
+  const WORKER_URL = 'https://api.loklai.com';
   const form = document.querySelector('form.contact-form');
   
   if (!form) return;
