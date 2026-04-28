@@ -322,10 +322,9 @@
 
           function enviaLead(dados){
             fetch(WORKER_URL + '/lead', {
-              method:'POST', 
-              headers:{'Content-Type':'application/json'},
-              body:JSON.stringify(dados),
-              keepalive:true
+              method:'POST',
+              body: JSON.stringify(dados),
+              keepalive: true
             }).catch(()=>{});
           }
 
