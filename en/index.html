@@ -305,7 +305,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
           const PHONE = '5519988820402';
-          const WORKER_URL = 'https://api.loklai.com';
+          const WORKER_URL = 'https://https://api.loklai.com';
 
           const chat = document.getElementById('lkChat');
           const btn = document.getElementById('lkBtn');
@@ -322,9 +322,10 @@
 
           function enviaLead(dados){
             fetch(WORKER_URL + '/lead', {
-              method:'POST',
-              body: JSON.stringify(dados),
-              keepalive: true
+              method:'POST', 
+              headers:{'Content-Type':'application/json'},
+              body:JSON.stringify(dados),
+              keepalive:true
             }).catch(()=>{});
           }
 
