@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const T = {
     pt: {
-      hello: 'OlÃ¡! ðŸ‘‹ Qual seu nome completo?',
+      hello: 'Olá! ðŸ‘‹ Qual seu nome completo?',
       askPhone: nome => `Prazer, ${nome}! Qual seu WhatsApp?`,
       askEmail: 'Perfeito. E seu melhor e-mail?',
-      askNeed: 'O que vocÃª precisa automatizar hoje?',
-      thanks: 'Obrigado! JÃ¡ avisei nossa equipe, vamos responder em minutos.',
+      askNeed: 'O que você precisa automatizar hoje?',
+      thanks: 'Obrigado! Vamos responder em minutos.',
       cta: 'Continuar no WhatsApp',
       phName: 'Seu nome completo',
       phPhone: '(19) 99999-9999',
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
       askPhone: nome => `Nice to meet you, ${nome}! What's your WhatsApp?`,
       askEmail: 'Great. And your best email?',
       askNeed: 'What do you need to automate today?',
-      thanks: 'Thanks! Iâ€™ve notified our team, weâ€™ll reply in minutes.',
+      thanks: 'Thanks! We will reply in minutes.',
       cta: 'Continue on WhatsApp',
       phName: 'Your full name',
       phPhone: '+1 (555) 000-0000',
