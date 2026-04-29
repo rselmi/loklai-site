@@ -3,7 +3,7 @@
  */
 document.addEventListener('DOMContentLoaded', function() {
   const PHONE = '5519988820402';
-  const WORKER_URL = 'https://api.loklai.co';
+  const WORKER_URL = 'https://api.loklai.com';
 
   const chat = document.getElementById('lkChat');
   const btn = document.getElementById('lkBtn');
