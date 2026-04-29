@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const isEN = location.pathname.startsWith('/en') || document.documentElement.lang?.toLowerCase().startsWith('en');
   const T = {
-    pt: { hello:'OlÃ¡! ðŸ‘‹ Qual seu nome completo?', askPhone:n=>`Prazer, ${n}! Qual seu WhatsApp?`, askEmail:'Perfeito. E seu melhor e-mail?', askNeed:'O que vocÃª precisa automatizar hoje?', thanks:'Obrigado! JÃ¡ avisei nossa equipe, vamos responder em minutos.', cta:'Continuar no WhatsApp', phName:'Seu nome completo', phPhone:'(19) 99999-9999', phEmail:'seu@email.com', phNeed:'Digite sua necessidade...' },
-    en: { hello:'Hi! ðŸ‘‹ What is your full name?', askPhone:n=>`Nice to meet you, ${n}! What's your WhatsApp?`, askEmail:'Great. And your best email?', askNeed:'What do you need to automate today?', thanks:'Thanks! Iâ€™ve notified our team, weâ€™ll reply in minutes.', cta:'Continue on WhatsApp', phName:'Your full name', phPhone:'+1 (555) 000-0000', phEmail:'you@email.com', phNeed:'Type your need...' }
+    pt: { hello:'Olá! Qual seu nome completo?', askPhone:n=>`Prazer, ${n}! Qual seu WhatsApp?`, askEmail:'Perfeito. E seu melhor e-mail?', askNeed:'O que você precisa automatizar hoje?', thanks:'Obrigado! Responder em minutos.', cta:'Continuar no WhatsApp', phName:'Seu nome completo', phPhone:'(19) 99999-9999', phEmail:'seu@email.com', phNeed:'Digite sua necessidade...' },
+    en: { hello:'Hi! What is your full name?', askPhone:n=>`Nice to meet you, ${n}! What's your WhatsApp?`, askEmail:'Great. And your best email?', askNeed:'What do you need to automate today?', thanks:'Thanks! We will reply in minutes.', cta:'Continue on WhatsApp', phName:'Your full name', phPhone:'+1 (555) 000-0000', phEmail:'you@email.com', phNeed:'Type your need...' }
   };
   const t = isEN ? T.en : T.pt;
 
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function registraAbandono(){
     if(!nome || step>=5) return;
-    envia({nome,telefone,email,texto:'ðŸš¨ ABANDONO widget etapa '+step, pagina:location.pathname, motivo:'abandono', idioma:isEN?'en':'pt'});
+    envia({nome,telefone,email,texto:'ABANDONO widget etapa '+step, pagina:location.pathname, motivo:'abandono', idioma:isEN?'en':'pt'});
   }
 
   btn.addEventListener('click',()=>{ chat.classList.toggle('open'); if(chat.classList.contains('open') && step===0){ msgs.innerHTML=''; input.placeholder=t.phName; bot(t.hello); step=1; setTimeout(()=>input.focus(),150);} });

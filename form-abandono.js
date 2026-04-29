@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
       nome: d.nome + (d.sobrenome ? ' '+d.sobrenome : ''),
       telefone: d.telefone,
       email: d.email,
-      texto: 'ðŸš¨ FORMULÃRIO ABANDONADO' + (d.empresa ? ' | '+d.empresa : ''),
+      texto: 'FORMULÁRIO ABANDONADO' + (d.empresa ? ' | '+d.empresa : ''),
       pagina: location.pathname,
       motivo: 'form_abandono'
     };
