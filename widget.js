@@ -1,11 +1,9 @@
 /**
- * Loklai Widget v4 - Final
- * Funciona em PT e EN
- * Envia lead completo e abandono
+ * Loklai Widget v5 - PT/EN + abandono inteligente
  */
 document.addEventListener('DOMContentLoaded', function() {
   const PHONE = '5519988820402';
-  const WORKER_URL = 'https://api.loklai.com';
+  const WORKER_URL = 'https://api.loklai.co';
 
   const chat = document.getElementById('lkChat');
   const btn = document.getElementById('lkBtn');
@@ -13,65 +11,94 @@ document.addEventListener('DOMContentLoaded', function() {
   const input = document.getElementById('lkInput');
   const sendBtn = document.getElementById('lkSend');
 
-  if (!btn || !chat || !input || !msgs) {
-    console.error('Loklai: elementos do widget nÃ£o encontrados');
-    return;
-  }
+  if (!btn || !chat || !input || !msgs) return;
+
+  // Detecta idioma
+  const isEN = location.pathname.startsWith('/en') || document.documentElement.lang?.toLowerCase().startsWith('en');
+
+  const T = {
+    pt: {
+      hello: 'OlÃ¡! ðŸ‘‹ Qual seu nome completo?',
+      askPhone: nome => `Prazer, ${nome}! Qual seu WhatsApp?`,
+      askEmail: 'Perfeito. E seu melhor e-mail?',
+      askNeed: 'O que vocÃª precisa automatizar hoje?',
+      thanks: 'Obrigado! JÃ¡ avisei nossa equipe, vamos responder em minutos.',
+      cta: 'Continuar no WhatsApp',
+      phName: 'Seu nome completo',
+      phPhone: '(19) 99999-9999',
+      phEmail: 'seu@email.com',
+      phNeed: 'Digite sua necessidade...'
+    },
+    en: {
+      hello: 'Hi! ðŸ‘‹ What is your full name?',
+      askPhone: nome => `Nice to meet you, ${nome}! What's your WhatsApp?`,
+      askEmail: 'Great. And your best email?',
+      askNeed: 'What do you need to automate today?',
+      thanks: 'Thanks! Iâ€™ve notified our team, weâ€™ll reply in minutes.',
+      cta: 'Continue on WhatsApp',
+      phName: 'Your full name',
+      phPhone: '+1 (555) 000-0000',
+      phEmail: 'you@email.com',
+      phNeed: 'Type your need...'
+    }
+  };
+  const t = isEN ? T.en : T.pt;
 
   let step = 0;
   let nome = '';
   let telefone = '';
   let email = '';
 
-  function bot(t) {
-    msgs.insertAdjacentHTML('beforeend', '<div class="lk-b lk-bot">' + t + '</div>');
+  function bot(txt) {
+    msgs.insertAdjacentHTML('beforeend', '<div class="lk-b lk-bot">' + txt + '</div>');
     msgs.scrollTop = msgs.scrollHeight;
   }
-
-  function user(t) {
-    msgs.insertAdjacentHTML('beforeend', '<div class="lk-b lk-user">' + t + '</div>');
+  function user(txt) {
+    msgs.insertAdjacentHTML('beforeend', '<div class="lk-b lk-user">' + txt + '</div>');
     msgs.scrollTop = msgs.scrollHeight;
   }
 
   function enviaLead(dados) {
+    fetch(WORKER_URL + '/lead', {
+      method: 'POST',
+      body: JSON.stringify(dados),
+      keepalive: true
+    }).catch(()=>{});
+  }
+
+  function registraAbandono() {
+    const temNomeCompleto = nome.trim().includes(' ');
+    const temContato = telefone.length > 7 || email.includes('@');
+    
+    if ((!temNomeCompleto && !temContato) || step >= 5 || !nome) return;
+
+    const dados = {
+      nome: nome,
+      telefone: telefone,
+      email: email,
+      texto: 'ðŸš¨ ABANDONO widget etapa ' + step + ' (nÃ£o completou)',
+      pagina: location.pathname,
+      motivo: 'abandono',
+      idioma: isEN ? 'en' : 'pt'
+    };
     try {
       fetch(WORKER_URL + '/lead', {
         method: 'POST',
         body: JSON.stringify(dados),
         keepalive: true
-      }).catch(() => {});
-    } catch (e) {}
-  }
-
-  function registraAbandono() {
-    if (!nome || step >= 5) return;
-    const dados = {
-      nome: nome,
-      telefone: telefone,
-      email: email,
-      texto: 'ðŸš¨ ABANDONO etapa ' + step + ' (não completou)',
-      pagina: location.pathname,
-      motivo: 'abandono'
-    };
-    try {
-      // no-cors + keepalive = funciona ao fechar aba
-      fetch(WORKER_URL + '/lead', {
-        method: 'POST',
-        body: JSON.stringify(dados),
-        keepalive: true,
-        mode: 'no-cors'
-      }).catch(() => {});
+      }).catch(()=>{});
       console.log('[Loklai] abandono enviado', dados);
-    } catch (e) {}
+    } catch(e){}
   }
 
   btn.addEventListener('click', function() {
     chat.classList.toggle('open');
     if (chat.classList.contains('open')) {
-      setTimeout(function() { input.focus(); }, 150);
+      setTimeout(()=>input.focus(), 150);
       if (step === 0) {
         msgs.innerHTML = '';
-        bot('Olá! ðŸ‘‹ Qual seu nome?');
+        input.placeholder = t.phName;
+        bot(t.hello);
         step = 1;
       }
     }
@@ -84,24 +111,26 @@ document.addEventListener('DOMContentLoaded', function() {
     user(texto);
 
     if (step === 1) {
-      nome = texto.split(' ')[0];
-      bot('Prazer, ' + nome + '! Qual seu WhatsApp?');
-      input.placeholder = '(19) 99999-9999';
+      nome = texto;
+      bot(t.askPhone(nome.split(' ')[0]));
+      input.placeholder = t.phPhone;
       step = 2;
     } else if (step === 2) {
       telefone = texto;
-      bot('Perfeito. E seu melhor e-mail?');
-      input.placeholder = 'seu@email.com';
+      bot(t.askEmail);
+      input.placeholder = t.phEmail;
+      input.type = 'email';
       step = 3;
     } else if (step === 3) {
       email = texto;
-      bot('Em que posso ajudar?');
-      input.placeholder = 'Digite...';
+      bot(t.askNeed);
+      input.placeholder = t.phNeed;
+      input.type = 'text';
       step = 4;
     } else if (step === 4) {
-      bot('Obrigado! Responderemos em breve.');
-      const link = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent('Oi, sou ' + nome + ' do site. ' + texto);
-      msgs.insertAdjacentHTML('beforeend', '<div class="lk-cta"><a href="' + link + '" target="_blank" rel="noopener">Continuar no WhatsApp</a></div>');
+      bot(t.thanks);
+      const link = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent((isEN ? 'Hi, I am ' : 'Oi, sou ') + nome + '. ' + texto);
+      msgs.insertAdjacentHTML('beforeend', '<div class="lk-cta"><a href="' + link + '" target="_blank" rel="noopener">' + t.cta + '</a></div>');
       msgs.scrollTop = msgs.scrollHeight;
       
       enviaLead({
@@ -111,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
         texto: texto,
         pagina: location.pathname,
         etapa: 4,
+        idioma: isEN ? 'en' : 'pt',
         horario: new Date().toISOString()
       });
       step = 5;
@@ -118,31 +148,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   sendBtn.addEventListener('click', enviar);
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      enviar();
-    }
-  });
+  input.addEventListener('keydown', e => { if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); enviar(); }});
 
-  // Abandono em 3 eventos
-  document.addEventListener('visibilitychange', function() {
-    if (document.hidden) registraAbandono();
-  });
+  document.addEventListener('visibilitychange', ()=>{ if(document.hidden) registraAbandono(); });
   window.addEventListener('pagehide', registraAbandono);
   window.addEventListener('beforeunload', registraAbandono);
 
-  // Teste no console
-  window.lkTeste = function() {
-    enviaLead({
-      nome: 'Teste Rafael',
-      telefone: '19988820402',
-      email: 'teste@loklai.com',
-      texto: 'Teste do widget final',
-      pagina: location.pathname
-    });
-    console.log('Teste enviado');
-  };
+  window.lkTeste = () => enviaLead({nome:'Teste',telefone:'',email:'',texto:'Teste v5',pagina:location.pathname});
 
-  console.log('Loklai widget v4 ativo');
+  console.log('Loklai widget v5 ativo -', isEN ? 'EN' : 'PT');
 });
