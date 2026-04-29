@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const T = {
     pt: {
-      hello: 'Olá! ðŸ‘‹ Qual seu nome completo?',
+      hello: 'Olá! Qual seu nome completo?',
       askPhone: nome => `Prazer, ${nome}! Qual seu WhatsApp?`,
       askEmail: 'Perfeito. E seu melhor e-mail?',
       askNeed: 'O que você precisa automatizar hoje?',
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
       phNeed: 'Digite sua necessidade...'
     },
     en: {
-      hello: 'Hi! ðŸ‘‹ What is your full name?',
+      hello: 'Hi! What is your full name?',
       askPhone: nome => `Nice to meet you, ${nome}! What's your WhatsApp?`,
       askEmail: 'Great. And your best email?',
       askNeed: 'What do you need to automate today?',
