@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
       nome: nome,
       telefone: telefone,
       email: email,
-      texto: 'ðŸš¨ ABANDONO etapa ' + step + ' (nÃ£o completou)',
+      texto: 'ðŸš¨ ABANDONO etapa ' + step + ' (não completou)',
       pagina: location.pathname,
       motivo: 'abandono'
     };
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(function() { input.focus(); }, 150);
       if (step === 0) {
         msgs.innerHTML = '';
-        bot('OlÃ¡! ðŸ‘‹ Qual seu nome?');
+        bot('Olá! ðŸ‘‹ Qual seu nome?');
         step = 1;
       }
     }
@@ -95,11 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
       step = 3;
     } else if (step === 3) {
       email = texto;
-      bot('O que vocÃª precisa automatizar hoje?');
+      bot('Em que posso ajudar?');
       input.placeholder = 'Digite...';
       step = 4;
     } else if (step === 4) {
-      bot('Obrigado! JÃ¡ avisei nossa equipe, vamos responder em minutos.');
+      bot('Obrigado! Responderemos em breve.');
       const link = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent('Oi, sou ' + nome + ' do site. ' + texto);
       msgs.insertAdjacentHTML('beforeend', '<div class="lk-cta"><a href="' + link + '" target="_blank" rel="noopener">Continuar no WhatsApp</a></div>');
       msgs.scrollTop = msgs.scrollHeight;

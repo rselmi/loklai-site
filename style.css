@@ -470,4 +470,4 @@ footer { padding: 4rem 5%; text-align: center; border-top: 1px solid var(--borde
 .lk-i button{background:#25D366;color:#0b141a;border:none;padding:10px 16px;border-radius:20px;cursor:pointer;font-weight:600;font-size:14px}
 .lk-i button:hover{background:#1ebe5d}
 
-@media(max-width:480px){.lk-chat{right:16px;left:16px;width:auto;bottom:84px;height:70vh}}
+@media(max-width:480px){.lk-chat{right:16px;left:16px;width:auto;bottom:84px;height:50vh}}
