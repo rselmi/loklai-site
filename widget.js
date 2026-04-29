@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const isEN = location.pathname.startsWith('/en') || document.documentElement.lang?.toLowerCase().startsWith('en');
   const T = {
-    pt: { hello:'Olá! Qual seu nome completo?', askPhone:n=>`Prazer, ${n}! Qual seu WhatsApp?`, askEmail:'Perfeito. E seu melhor e-mail?', askNeed:'O que você precisa automatizar hoje?', thanks:'Obrigado! Responder em minutos.', cta:'Continuar no WhatsApp', phName:'Seu nome completo', phPhone:'(19) 99999-9999', phEmail:'seu@email.com', phNeed:'Digite sua necessidade...' },
+    pt: { hello:'Olá! Qual seu nome completo?', askPhone:n=>`Prazer, ${n}! Qual seu WhatsApp?`, askEmail:'Perfeito. E seu melhor e-mail?', askNeed:'O que você precisa automatizar hoje?', thanks:'Obrigado! Responderemos em minutos.', cta:'Continuar no WhatsApp', phName:'Seu nome completo', phPhone:'(19) 99999-9999', phEmail:'seu@email.com', phNeed:'Digite sua necessidade...' },
     en: { hello:'Hi! What is your full name?', askPhone:n=>`Nice to meet you, ${n}! What's your WhatsApp?`, askEmail:'Great. And your best email?', askNeed:'What do you need to automate today?', thanks:'Thanks! We will reply in minutes.', cta:'Continue on WhatsApp', phName:'Your full name', phPhone:'+1 (555) 000-0000', phEmail:'you@email.com', phNeed:'Type your need...' }
   };
   const t = isEN ? T.en : T.pt;
