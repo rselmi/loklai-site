@@ -1,4 +1,4 @@
-:root {
+footerroot {
     --primary: #ffffff;
     --accent: #2563eb;
     --accent-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
@@ -430,7 +430,7 @@ header {
 }
 
 /* Footer */
-footer { padding: 4rem 5%; text-align: center; border-top: 1px solid var(--border); color: #52525b; }
+footer { padding: 1rem 5%; text-align: center; border-top: 1px solid var(--border); color: #52525b; }
 
 /* Animações */
 .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
